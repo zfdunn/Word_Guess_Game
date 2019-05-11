@@ -11,13 +11,29 @@
 
 <body>
 <script type="text/javascript">
-    var sharkType = ["baby", "daddy", "mommy", "doggy", "grandma", "grandpa"];
     var gameAnswer = "";
+    var sharkType = ["baby", "daddy", "mommy", "doggy", "grandma", "grandpa"];
         sharkType = gameAnswer
+    var wins = 0;
+    var losses = 0;
+    var ties = 0;
     document.onkeyup = function() {
         var userGuess = String.fromCharCode(event.keyCode);
             toLowerCase();
         console.log(userGuess)
+
+        if (userGuess===[sharkType] ) {
+            return "";
+
+        }
+        if (userGuess === gameAnswer ) {
+            wins++
+            return ("Wins:" + wins);
+        }
+
+
+
+
 
         var maxGuess = numArr[0];
             for (var i = 1; i < numArr.length; i++) {

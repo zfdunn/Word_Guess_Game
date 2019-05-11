@@ -8,7 +8,22 @@
 
 <body>
 <script type="text/javascript">
-    
+    var options = [
+    document.onkeyup = function() {
+
+        var userGuess = function(numArr) {
+            var maxGuess = numArr[0];
+            for (var i = 1; i < numArr.length; i++) {
+                if (numArr[i] > maxGuess) {
+                    maxGuess = numArr[i];
+                }
+            }
+
+            return maxGuess;
+        };
+
+        var gameAnswer = [1, 2, 3];
+        console.log(findMax(gameAnswer));
 
     
 </script>

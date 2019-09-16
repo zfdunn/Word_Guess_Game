@@ -1,128 +1,97 @@
-// rev2.0
+// referenced the variables using document.getByID so it displays on the UI
+var directionsText = document.getElementById("directionsText");
+var totalWins = document.getElementById("totalWins)";
+var currentWord = document.getElementById("currentWord");
+var remainingGuesses = document.getElementById("guessCounter");
+var wrongLetters = document.getElementById("usedLetters");
+var spaces = document.getElementById("spaces");
+// ------------------------------------------------------------------------
+// all variables - below
+var secretWord = "";
+var guessedWord = [];
+var guessCounter = 0;
+var usedLetters = [];
+var winCounter = 0;
+// ------------------------------------------------------------------------
+// var wordsList based on theme chosen - "baby shark song(s)"
+var sharkList = ["baby", "daddy", "mommy", "doggy", "grandma", "grandpa", "cousin", "disco", "santa"];
+// ------------------------------------------------------------------------
+// updated code:
 
-<script type="text/javascript">
-{/* // 1. [Watch the demo](https://youtu.be/W-IJcC4tYFI).
-        // completed. 
-// 2. Choose a theme for your game! In the demo, we picked an 80s theme: 80s questions, 80s sound and an 80s aesthetic. You can choose any subject for your theme, though, so be creative!
-        // baby shark theme 
-// 3. Use key events to listen for the letters that your players will type.
+// Game start
+window.onkeypress = function initializeGame (event) {
+    console.log("guessCounter is " + guessCounter)
+};
 
-// 4. Display the following on the page:
-
-// 5. Press any key to get started!
-
-// 6. Wins: (# of times user guessed the word correctly).
-
-//    * If the word is `madonna`, display it like this when the game starts: `_ _ _ _ _ _ _`.
-// **text shared from classmate on slack** */}
-var underscores = [];
-var letterCount = function (word) {
-    for (i = 0; i < word.length; i++) {
-        underscores[i] = "_";
+if (secretWord === "") {
+    // initializes secret word
+    secretWord = sharkList[Math.floor(math.random() * sharkList.length)];
+    guessCounter = secretWord.length + 2;
+    console.log(guessCounter);
+    directionsText.style.display = ("none");
+    // prints secret word to console:
+    console.log(secretWord);
+    // create guessed word variable; gets underscore for each letter in the secret word.
+    for ( var i = 0; i < secretWord.length; i++){
+        if (secretWord[i] === " ") {
+            guessedWord.push("&nbsp;");
+        }
+        else {
+            guessedWord.push("_");
+        }
     }
-    document.querySelector('.word').innerHTML = underscores.join("");
+// ----------------------------------------------------------------------------------------
+// borrowed classmate's code (start):
+    else {
+                
+        // decrements guess counter if the chosen letter does not exist 
+        if (!usedLetters.includes(String.fromCharCode (event.CharCode)) && (!guessedWord.includes(String.fromCharCode (event.CharCode))))
+            guessCounter--;
+    }
+        console.log('guessCounter is ' + guessCounter);
+        // logs string to console for checking:
+        console.log(String.fromCharCode(event.CharCode));
+
+        // check if secret word or used letters
+        if (!secretWord.includes(String.fromCharCode(event.CharCode)) && (!usedLetters.includes(String.fromCharCode(event.CharCode)))){
+            usedLetters.push(String.fromCharCode(event.CharCode));
+        }
+        for (var i=0; i<secretWord.length; i++){
+        // displays letter in secret word
+        if(secretWord[i] === String.fromCharCode(event.CharCode)){
+            guessedWord[i] = String.fromCharCode(event.CharCode);
+        }
+    }
+    // win or lose scenarios 
+        console.log(secretWord);
+        console.log(guessedWord);
+    // if the secret word is filled in completely
+    if (!guessedWord.includes("_")){
+        // displays an alert & write to console
+        alert("You're right! The secret word was " + secretWord);
+        console.log("User guessed correctly");
+        // increments win counter by 1, & logs to console
+        winCounter++;
+        console.log("Total Wins " + winCounter);
+        usedLetters = [ ];
+        secretWord = "";
+        guessedWord = [ ];
+        console.log(guessCounter, guessedWord, usedLetters, secretWord);
+        initializeGame();
 }
-
-//    * As the user guesses the correct letters, reveal them: `m a d o _  _ a`.
-letterCount(word); 
-var wrongGuess = [];
-// 7. Number of Guesses Remaining: (# of guesses remaining for the user).
-var chancesLeft = word.length + 3;
-document.querySelector('.num-chances').innerHTML = chancesLeft;
-document.onkeyup = function (guess) {
-    if (chancesLeft > 0) {
-        if (!guess.key.toUpperCase().match(/^[A-Za-z]$/)) {
-            return;
-        }
-        var found = false;
-        for (var j = 0; j < word.length; j++) {
-            if (word[j] === guess.key.toUpperCase()) {
-                found = true;
-                underscores[j] = guess.key.toUpperCase();
-                document.querySelector('.word').innerHTML = underscores.join("");
-            }
-        }
-// 8. Letters Already Guessed: (Letters the user has guessed, displayed like `L Z Y H`).
-
-// 9. After the user wins/loses the game should automatically choose another word and make the user play it.
-
-
-        var gameAnswer = "";
-        var sharkType = ["baby", "daddy", "mommy", "doggy", "grandma", "grandpa", "cousin", "disco", "santa"]; {
-            userGuess: funciton() {
-                document.write(userGuess);
-            }
-
-        }
-            sharkType = gameAnswer
-        var wins = 0;
-        var losses = 0;
-        var ties = 0;
-        document.onkeyup = function() {
-            var userGuess = String.fromCharCode(event.keyCode);
-                toLowerCase();
-            console.log(userGuess);
-            for (let i = userGuess; i < 6; i++);{
-                console.log(i+1);
-            }
-
-            if (userGuess===[sharkType] ) {
-                return "";
-
-            }
-            if (userGuess === gameAnswer ) {
-                wins++
-                return ("Wins:" + wins);
-            }
-
-
-
-
-
-            // var maxGuess = numArr[0];
-            //     for (var i = 1; i < numArr.length; i++) {
-            //         if (numArr[i] > maxGuess) {
-            //             maxGuess = numArr[i];
-            //         }
-            //     }
-
-            //     return maxGuess;
-            // };
-
-            // var gameAnswer = sharkType [1, 2, 3];
-            // console.log(findMax(gameAnswer));
-
-
-// // rev.1
-// <script type="text/javascript">
-//     var sharkType = ["baby", "daddy", "mommy", "doggy", "grandma", "grandpa"];
-//     var gameAnswer = "";
-//         sharkType = gameAnswer
-//     document.onkeyup = function() {
-//         var userGuess = String.fromCharCode(event.keyCode);
-//             toLowerCase();
-//         console.log(userGuess)
-//     }
-//         for (let i = 0; i < 6; i++);{
-//             console.log(i);
-//         }
-
-//         {/* var maxGuess = numArr[0];
-//             for (var i = 1; i < numArr.length; i++) {
-//                 if (numArr[i] > maxGuess) e{
-//                     maxGuess = numArr[i];
-//                 }
-//             }
-
-//             return maxGuess;
-//         };
-
-//         var gameAnswer = sharkType [1, 2, 3];
-//         console.log(findMax(gameAnswer)); */}
-
-
-//         {/* code from slack + classmate */}
-        
-
-    
-// </script>
+else if (guessCounter === 0){
+    alert("Sorry! You ran out of guesses.  The secret word was " + secretWord);
+    console.log("User ran out of turns");
+    usedLetters = [];
+    secretWord = "";
+    guessedWord = [];
+    console.log(guessCounter, guessedWord, usedLetters, secretWord);
+    initializeGame();
+}
+// borrowed classmate's code (end)
+// ----------------------------------------------------------------------------------------
+currentWord.innerHTML = guessedWord.join(" ");
+remainingGuesses.innerHTML = guessCounter;
+wrongLetters.innerHTML = usedLetters;
+totalWins.innerHTML = winCounter;
+}

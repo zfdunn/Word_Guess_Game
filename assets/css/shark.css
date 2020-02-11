@@ -1,0 +1,17 @@
+div {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    word-spacing: 0.2px;
+    color: #5a62ff;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: none;
+}
+body {
+    border: 12vh;
+    background-origin: border-box;
+    background-image: url(../images/babyshark.jpg);
+}
